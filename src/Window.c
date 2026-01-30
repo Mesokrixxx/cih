@@ -1,4 +1,4 @@
-#include "window.h"
+#include "Window.h"
 #include <stdio.h>
 
 Window *window_create(Allocator *al, Vec2i size, const char *title) {

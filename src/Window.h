@@ -2,8 +2,8 @@
 # define WINDOW_H
 
 # include <SDL3/SDL_video.h>
-# include "allocator.h"
-# include "vector.h"
+# include "Allocator.h"
+# include "Vector.h"
 
 typedef struct {
 	Allocator *al;

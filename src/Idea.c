@@ -1,4 +1,4 @@
-#include "idea.h"
+#include "Idea.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -11,8 +11,8 @@ Idea *idea_create(void) {
 		return NULL;
 	}
 	*i = (Idea) {
-		.title = dynlist_create(sizeof(char), IDEA_TITLE_BUFFER_ISIZE),
-		.description = dynlist_create(sizeof(char), IDEA_DESCR_BUFFER_ISIZE),
+		.title = dynlist_create(sizeof(char), IDEA_TITLE_BUFFER_ISIZE, NULL),
+		.description = dynlist_create(sizeof(char), IDEA_DESCR_BUFFER_ISIZE, NULL),
 	};
 	if (!i->title || !i->description) {
 		idea_destroy(i);

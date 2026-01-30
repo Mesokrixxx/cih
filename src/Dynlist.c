@@ -1,8 +1,8 @@
-#include "dynlist.h"
+#include "Dynlist.h"
 #include <stdio.h>
 #include <string.h>
 
-Dynlist *dynlist_create(size_t data_size, size_t cap) {
+Dynlist *dynlist_create(size_t data_size, size_t cap, f_dynlist_free f_free) {
 	Dynlist *dl;
 
 	dl = malloc(sizeof(Dynlist) + (data_size * cap));
@@ -10,7 +10,7 @@ Dynlist *dynlist_create(size_t data_size, size_t cap) {
 		perror("dynlist_create: malloc");
 		return NULL;
 	}
-	*dl = (Dynlist){ .data_size = data_size, .cap = cap };
+	*dl = (Dynlist){ .f_free = f_free, .data_size = data_size, .cap = cap };
 	return dl;
 }
 
@@ -43,8 +43,18 @@ void *dynlist_get(Dynlist *dl, size_t index) {
 	return (char *)dl + sizeof(Dynlist) + (dl->data_size * index);
 }
 
+void dynlist_clear(Dynlist *dl) {
+	if (dl->f_free) {
+		dynlist_foreach(dl, idx, elem,
+			dl->f_free(elem);
+		);
+	}
+	dl->size = 0;
+}
+
 void dynlist_destroy(Dynlist *dl) {
 	if (!dl)
 		return ;
+	dynlist_clear(dl);
 	free(dl);
 }

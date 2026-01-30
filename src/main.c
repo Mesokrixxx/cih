@@ -1,11 +1,15 @@
 #include <SDL3/SDL.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "window.h"
-#include "idea.h"
+#include "Window.h"
+#include "Idea.h"
+
+#define IDEAS_DLIST_ISIZE 8
 
 typedef struct {
 	Window *win;
+	InputHandler 
+	Dynlist *ideas;
 	bool running;
 } State;
 
@@ -19,6 +23,9 @@ int main(void) {
 	}
 	st.win = window_create(NULL, vec2i_of2i(1080, 720), "C Idea Handler");
 	if (!st.win)
+		return 1;
+	st.ideas = dynlist_create(sizeof(Idea), IDEAS_DLIST_ISIZE, idea_destroy);
+	if (!st.ideas)
 		return 1;
 	st.running = true;
 	while (st.running) {

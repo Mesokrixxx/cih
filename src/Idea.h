@@ -1,7 +1,7 @@
 #ifndef IDEA_H
 # define IDEA_H
 
-# include "dynlist.h"
+# include "Dynlist.h"
 
 # define IDEA_TITLE_BUFFER_ISIZE 128
 # define IDEA_DESCR_BUFFER_ISIZE 1028
