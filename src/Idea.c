@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define IDEA_TITLE_BUFFER_ISIZE 128
+#define IDEA_DESCR_BUFFER_ISIZE 1028
+
 Idea *idea_create(void) {
 	Idea *i;
 

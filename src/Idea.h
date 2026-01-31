@@ -3,9 +3,6 @@
 
 # include "Dynlist.h"
 
-# define IDEA_TITLE_BUFFER_ISIZE 128
-# define IDEA_DESCR_BUFFER_ISIZE 1028
-
 typedef struct {
 	Dynlist *title;
 	Dynlist *description;

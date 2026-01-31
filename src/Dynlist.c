@@ -36,6 +36,7 @@ bool dynlist_pushs(Dynlist **dl, const void *val, size_t count) {
 		dynlist_get(tmp, tmp->size), 
 		val, 
 		tmp->data_size * count);
+	tmp->size = nsize;
 	return true;
 }
 

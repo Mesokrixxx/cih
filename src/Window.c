@@ -20,6 +20,9 @@ Window *window_create(Allocator *al, Vec2i size, const char *title) {
 		fprintf(stderr, 
 			"Failed to create window handler: %s\n", 
 			SDL_GetError());
+		al ?
+			allocator_free(al, sizeof(Window))
+			: free(w);
 		return NULL;
 	}
 	w->size = size;
