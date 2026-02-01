@@ -37,6 +37,7 @@ int main(void) {
 			if (ev.type == SDL_EVENT_QUIT) {
 				st.running = false;
 			}
+			window_processEvent(st.win, &ev);
 			inputhandler_processEvent(st.inputh, &ev);
 		}
 	}

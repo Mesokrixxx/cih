@@ -30,6 +30,14 @@ Window *window_create(Allocator *al, Vec2i size, const char *title) {
 	return w;
 }
 
+void window_processEvent(Window *w, const SDL_Event *ev) {
+	switch (ev->type) {
+		case (SDL_EVENT_WINDOW_RESIZED):
+			w->size = vec2i_of(ev->window.data1, ev->window.data2);
+			break ;
+	}
+}
+
 void window_destroy(Window *w) {
 	if (!w)
 		return ;
