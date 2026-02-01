@@ -8,6 +8,7 @@
 #define IDEAS_DLIST_ISIZE 8
 
 typedef struct {
+	Allocator *g_allocator;
 	Window *win;
 	InputHandler *inputh;
 	Dynlist *ideas;
@@ -17,15 +18,18 @@ typedef struct {
 int main(void) {
 	State st;
 
+	st.g_allocator = allocator_create(MiB(1));
+	if (!st.g_allocator)
+		return 1;
 	if (!SDL_Init(SDL_INIT_VIDEO)) {
 		fprintf(stderr,
 			"Failed to init sdl3: %s\n", SDL_GetError());
 		return 1;
 	}
-	st.win = window_create(NULL, vec2i_of(1080, 720), "C Idea Handler");
-	st.inputh = inputhandler_create(NULL, st.win);
+	st.win = window_create(st.g_allocator, vec2i_of(1080, 720), "C Idea Handler");
+	st.inputh = inputhandler_create(st.g_allocator, st.win);
 	st.ideas = dynlist_create(sizeof(Idea), IDEAS_DLIST_ISIZE, (f_dynlist_free)idea_destroy);
-	if (!st.win || !st.inputh || !st.ideas)
+	if (!st.ideas)
 		return 1;
 	st.running = true;
 	while (st.running) {
@@ -44,6 +48,7 @@ int main(void) {
 	dynlist_destroy(st.ideas);
 	inputhandler_destroy(st.inputh);
 	window_destroy(st.win);
+	allocator_destroy(st.g_allocator);
 	SDL_Quit();
 	return 0;
 }

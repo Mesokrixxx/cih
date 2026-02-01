@@ -2,6 +2,11 @@
 # define ALLOCATOR_H
 
 # include <stdlib.h>
+# include <stdint.h>
+
+# define KiB(_s) ((uint64_t)(_s) << 10)
+# define MiB(_s) ((uint64_t)(_s) << 20)
+# define GiB(_s) ((uint64_t)(_s) << 30)
 
 typedef struct {
 	size_t size;
